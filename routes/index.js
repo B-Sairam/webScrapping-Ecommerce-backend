@@ -1,5 +1,4 @@
-const { ObjectId } = require('bson');
-const { Router } = require('express');
+
 var express = require('express');
 var router = express.Router();
 const {dbURL,mongodb,MongoClient,dbName}  = require('../dbConfig')
@@ -41,7 +40,8 @@ router.get('/',async(req,res)=>{
     }
     finally{
       client.close();
-    }
+}
 })
 
 module.exports = router;
+
