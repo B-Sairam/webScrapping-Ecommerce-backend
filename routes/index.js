@@ -1,8 +1,10 @@
 const { ObjectId } = require('bson');
+const { Router } = require('express');
 var express = require('express');
 var router = express.Router();
 const {dbURL,mongodb,MongoClient,dbName}  = require('../dbConfig')
 /* GET home page. */
+
 
 router.get('/',async(req,res)=>{
     let client = await MongoClient.connect(dbURL);
@@ -18,13 +20,13 @@ router.get('/',async(req,res)=>{
         res.json({
             statusCode:200,
             message:"Fetched successfully",
-            beauty_data:beauty,
-            dress_data:dress,
-            furnitures_data:furnitures,
-            laptops_data:laptops,
-            mobiles_data:mobiles,
-            shelves_data:shelves,
-            shoes_data:shoes
+            products_data:{beauty_product:beauty,
+                dress_product:dress,
+                furnitures_product:furnitures,
+                laptops_product:laptops,
+                mobiles_product:mobiles,
+                shelves_product:shelves,
+                shoes_product:shoes}
 
 
 
@@ -36,6 +38,9 @@ router.get('/',async(req,res)=>{
             error:error
         })
         console.log(error);
+    }
+    finally{
+      client.close();
     }
 })
 
